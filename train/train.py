@@ -64,7 +64,8 @@ cls_list = [
 ]
 
 # Selection the best classifier
-res = {}
+res_cls = {}
+res_accuracy = {}
 for model in cls_list:
     # Train the model with our split data
     model.fit(x_train, y_train)
@@ -73,10 +74,11 @@ for model in cls_list:
     y_pred = model.predict(x_test)
 
     # Add to res
-    res[model.__class__.__name__] = accuracy_score(y_test, y_pred)
+    res_accuracy[model.__class__.__name__] = accuracy_score(y_test, y_pred)
+    res_cls[model.__class__.__name__] = model
 
-print(f"The best accuracy score is obtained by the classifier : {max(res)}")
-for k, v in res.items():
+print(f"The best accuracy score is obtained by the classifier : {max(res_accuracy)}")
+for k, v in res_accuracy.items():
     print(f"{k} => {v}")
 
 # Save the model in the app directory, to get used
@@ -85,6 +87,6 @@ with open(os.path.join(project_dir, "app", "models", "label_encoder.pkl"), "wb")
     pkl.dump(le, f)
 
 # Save the model in the app directory, to get used
-with open(os.path.join(project_dir, "app", "models", "linear_svc.pkl"), "wb") as f:
+with open(os.path.join(project_dir, "app", "models", "model.pkl"), "wb") as f:
     print("The trained model has been saved")
-    pkl.dump(model, f)
+    pkl.dump(res_cls[max(res_accuracy)], f)

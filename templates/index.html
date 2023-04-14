@@ -6,8 +6,38 @@
     <style>
         body {
             height: 100%;
+            width: 100%;
             background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/50598/concrete-wall-background.jpg) center center fixed;
             background-size: cover;
+        }
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            float: left;
+        }
+
+        nav li a {
+            display: block;
+            color: rgba(238, 238, 238, 0.7);
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.5rem;
+        }
+
+        nav li a:hover {
+            background-color: #415043;
         }
 
         .shade {
@@ -116,8 +146,15 @@
 </head>
 <body>
 <div class="shade">
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/dataviz">Dataviz</a></li>
+            <li><a href="/test">Test</a></li>
+        </ul>
+    </nav>
     <div class="blackboard">
-        {% if result %}
+        {% if not result %}
         <form id="maladieForm" enctype="multipart/form-data" method="post" action="/maladie">
             <div class="form">
                 <p>
@@ -126,8 +163,8 @@
                 </p>
                 <p>
                     <label>Gender: </label>
-                    <input type="checkbox" name="genre" value="1"/> Homme
-                    <input type="checkbox" name="genre" value="0"/> Femme
+                    <input type="radio" name="genre" value="1"/> Homme
+                    <input type="radio" name="genre" value="0"/> Femme
                 </p>
                 <p>
                     <label>Height: </label>
@@ -147,7 +184,11 @@
                 </p>
                 <p>
                     <label>Cholesterol level: </label>
-                    <input type="text" name="cholesterol"/>
+                    <select name="cholesterol">
+                        <option value="normal">Normal</option>
+                        <option value="eleve">Elevé</option>
+                        <option value="tres eleve">Très élevé</option>
+                    </select>
                 </p>
                 <p>
                     <label>Glycemic level: </label>
@@ -155,18 +196,18 @@
                 </p>
                 <p>
                     <label>Smoker or not? </label>
-                    <input type="checkbox" name="fumeur" value="1"/> Oui
-                    <input type="checkbox" name="fumeur" value="0"/> Non
+                    <input type="radio" name="fumeur" value="1"/> Oui
+                    <input type="radio" name="fumeur" value="0"/> Non
                 </p>
                 <p>
                     <label>Alcohol or not? </label>
-                    <input type="checkbox" name="conso_alco" value="1"/> Oui
-                    <input type="checkbox" name="conso_alco" value="0"/> Non
+                    <input type="radio" name="conso_alco" value="1"/> Oui
+                    <input type="radio" name="conso_alco" value="0"/> Non
                 </p>
                 <p>
                     <label>Physical activity or not? </label>
-                    <input type="checkbox" name="activite_physique" value="1"/> Oui
-                    <input type="checkbox" name="activite_physique" value="0"/> Non
+                    <input type="radio" name="activite_physique" value="1"/> Oui
+                    <input type="radio" name="activite_physique" value="0"/> Non
                 </p>
                 <p class="wipeout">
                     <input type="submit" value="Send"/>

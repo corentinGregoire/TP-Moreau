@@ -20,6 +20,11 @@ app.include_router(router)
 
 @app.get("/", response_class=HTMLResponse)
 async def get_homepage(request: Request):
+    """Page root of the project.
+
+    :param request: Request object checked by the auth_required decorator
+    :return: Template response for the index page
+    """
     return templates.TemplateResponse(
         name='index.html',
         context={"request": request}
